@@ -18,7 +18,7 @@ namespace Solution.UI.Controllers
 
         public IActionResult Index()
         {
-            throw new ApplicationException("Ha ocurrido algo malo");
+            //throw new ApplicationException("Ha ocurrido algo malo");
             //List<string> Pais = new List<string>() { "Rumania", "Rusia", "Eslovaquia","Ucrania" };
             return View(repo.ObtenerTodos());
         }
