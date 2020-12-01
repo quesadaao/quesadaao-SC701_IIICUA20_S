@@ -28,7 +28,6 @@ namespace BS
         public async Task<IEnumerable<data.GroupComment>> GetAllInclude()
         {
             return await new DAL.GroupComment(_repo).GetAllInclude();
-            //return await _unitOfWork.Artists.GetAllAsync();
         }
 
         public data.GroupComment GetOneById(int id)

@@ -34,10 +34,7 @@ namespace API
 
             services.AddControllers();
 
-            
-
-            //services.AddAutoMapper(typeof(Startup));
-
+            // Seccion que representa la inicializacion del automaper para que trabaje correctamente 
             // Auto Mapper Configurations
             var mapperConfig = new MapperConfiguration(mc =>
             {
@@ -46,6 +43,7 @@ namespace API
 
             IMapper mapper = mapperConfig.CreateMapper();
             services.AddSingleton(mapper);
+            // Finaliza la implementacion de automapper //
 
             // Register the Swagger generator, defining 1 or more Swagger documents
             services.AddSwaggerGen();

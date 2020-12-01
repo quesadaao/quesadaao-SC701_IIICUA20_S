@@ -6,9 +6,10 @@ using DO.Objects;
 
 namespace DAL.Repository
 {
+    //Interfase encargada de definir como vamos a implementar los metodos de include
+    //Esta misma Interfase implementa la interfase de repository para poder acceder a los metodos basicos 
     public interface IRepositoryGroupComment: IRepository<GroupComment>
     {
-        //IEnumerable<GroupComment> GetAllWithGroupCommentsAsync();
         Task<IEnumerable<GroupComment>> GetAllWithGroupCommentsAsync();
         Task<GroupComment> GetWithGroupCommentByIdAsync(int id);
     }

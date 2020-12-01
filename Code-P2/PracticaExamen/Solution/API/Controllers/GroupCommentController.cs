@@ -15,8 +15,11 @@ namespace API.Controllers
     public class GroupCommentController : ControllerBase
     {
         private readonly SolutionDBContext _context;
+        // Declaracion del automapper para poder castear los objetos 
         private readonly IMapper _mapper;
 
+        // Necesitamos agregar Automapper en el constructor 
+        // La arquitectura de .Net Core nos indica recibirlo para trabajar con Dependency Inyection
         public GroupCommentController(SolutionDBContext context, IMapper mapper)
         {
             this._mapper = mapper;
@@ -27,7 +30,10 @@ namespace API.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<DataModels.GroupComment>>> GetGroupComments()
         {
+            // Declaramos la variable para traer los datos correspondientes 
             var aux = await new BS.GroupComment(_context).GetAllInclude();
+
+            // Hacemos el casting del dato una vez que ya el proceso finaliza en la base de datos 
             var mapaux = _mapper.Map<IEnumerable<data.GroupComment>, IEnumerable<DataModels.GroupComment>>(aux).ToList();
             return mapaux;
         }
@@ -38,13 +44,11 @@ namespace API.Controllers
         {
             var groupComment = new BS.GroupComment(_context).GetOneById(id);
             var mapaux = _mapper.Map<data.GroupComment, DataModels.GroupComment>(groupComment);
-            //return mapaux;
             if (mapaux == null)
             {
                 return NotFound();
             }
             return mapaux;
-            //return groupComment;
         }
 
         // PUT: api/GroupComments/5
@@ -100,7 +104,6 @@ namespace API.Controllers
             }
             new BS.GroupComment(_context).Delete(groupComment);
             var mapaux = _mapper.Map<data.GroupComment, DataModels.GroupComment>(groupComment);
-            // return null;
             return mapaux;
         }
 

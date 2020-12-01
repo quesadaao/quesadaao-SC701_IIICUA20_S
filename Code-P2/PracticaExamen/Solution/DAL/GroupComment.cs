@@ -14,6 +14,8 @@ namespace DAL
 {
     public class GroupComment : ICRUD<data.GroupComment>
     {
+        // Definicion de la variable que va implementar el repositorio especial utilizado 
+        // ya que necesitamos agregar el include en los metodos de repository 
         private RepositoryGroupComment _repo = null;
         public GroupComment(SolutionDBContext solutionDBContext)
         {
