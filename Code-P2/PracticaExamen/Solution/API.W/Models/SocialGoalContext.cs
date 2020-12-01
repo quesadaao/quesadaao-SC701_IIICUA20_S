@@ -87,10 +87,10 @@ namespace API.W.Models
                     .HasMaxLength(128)
                     .HasColumnName("User_Id");
 
-                entity.HasOne(d => d.User)
-                    .WithMany(p => p.AspNetUserClaims)
-                    .HasForeignKey(d => d.UserId)
-                    .HasConstraintName("FK_dbo.AspNetUserClaims_dbo.AspNetUsers_User_Id");
+                //entity.HasOne(d => d.User)
+                //    .WithMany(p => p.AspNetUserClaims)
+                //    .HasForeignKey(d => d.UserId)
+                //    .HasConstraintName("FK_dbo.AspNetUserClaims_dbo.AspNetUsers_User_Id");
             });
 
             modelBuilder.Entity<AspNetUserLogin>(entity =>
@@ -104,10 +104,10 @@ namespace API.W.Models
 
                 entity.Property(e => e.ProviderKey).HasMaxLength(128);
 
-                entity.HasOne(d => d.User)
-                    .WithMany(p => p.AspNetUserLogins)
-                    .HasForeignKey(d => d.UserId)
-                    .HasConstraintName("FK_dbo.AspNetUserLogins_dbo.AspNetUsers_UserId");
+                //entity.HasOne(d => d.User)
+                //    .WithMany(p => p.AspNetUserLogins)
+                //    .HasForeignKey(d => d.UserId)
+                //    .HasConstraintName("FK_dbo.AspNetUserLogins_dbo.AspNetUsers_UserId");
             });
 
             modelBuilder.Entity<AspNetUserRole>(entity =>
@@ -119,15 +119,15 @@ namespace API.W.Models
 
                 entity.Property(e => e.RoleId).HasMaxLength(128);
 
-                entity.HasOne(d => d.Role)
-                    .WithMany(p => p.AspNetUserRoles)
-                    .HasForeignKey(d => d.RoleId)
-                    .HasConstraintName("FK_dbo.AspNetUserRoles_dbo.AspNetRoles_RoleId");
+                //entity.HasOne(d => d.Role)
+                //    .WithMany(p => p.AspNetUserRoles)
+                //    .HasForeignKey(d => d.RoleId)
+                //    .HasConstraintName("FK_dbo.AspNetUserRoles_dbo.AspNetRoles_RoleId");
 
-                entity.HasOne(d => d.User)
-                    .WithMany(p => p.AspNetUserRoles)
-                    .HasForeignKey(d => d.UserId)
-                    .HasConstraintName("FK_dbo.AspNetUserRoles_dbo.AspNetUsers_UserId");
+                //entity.HasOne(d => d.User)
+                //    .WithMany(p => p.AspNetUserRoles)
+                //    .HasForeignKey(d => d.UserId)
+                //    .HasConstraintName("FK_dbo.AspNetUserRoles_dbo.AspNetUsers_UserId");
             });
 
             modelBuilder.Entity<Comment>(entity =>
@@ -150,10 +150,10 @@ namespace API.W.Models
 
                 entity.Property(e => e.FocusName).HasMaxLength(50);
 
-                entity.HasOne(d => d.Group)
-                    .WithMany(p => p.Foci)
-                    .HasForeignKey(d => d.GroupId)
-                    .HasConstraintName("FK_dbo.Foci_dbo.Groups_GroupId");
+                //entity.HasOne(d => d.Group)
+                //    .WithMany(p => p.Foci)
+                //    .HasForeignKey(d => d.GroupId)
+                //    .HasConstraintName("FK_dbo.Foci_dbo.Groups_GroupId");
             });
 
             modelBuilder.Entity<FollowRequest>(entity =>
@@ -179,25 +179,25 @@ namespace API.W.Models
 
                 entity.Property(e => e.ToUserId).HasMaxLength(128);
 
-                entity.HasOne(d => d.ApplicationUser)
-                    .WithMany(p => p.FollowUserApplicationUsers)
-                    .HasForeignKey(d => d.ApplicationUserId)
-                    .HasConstraintName("FK_dbo.FollowUsers_dbo.AspNetUsers_ApplicationUser_Id");
+                //entity.HasOne(d => d.ApplicationUser)
+                //    .WithMany(p => p.FollowUserApplicationUsers)
+                //    .HasForeignKey(d => d.ApplicationUserId)
+                //    .HasConstraintName("FK_dbo.FollowUsers_dbo.AspNetUsers_ApplicationUser_Id");
 
-                entity.HasOne(d => d.ApplicationUserId1Navigation)
-                    .WithMany(p => p.FollowUserApplicationUserId1Navigations)
-                    .HasForeignKey(d => d.ApplicationUserId1)
-                    .HasConstraintName("FK_dbo.FollowUsers_dbo.AspNetUsers_ApplicationUser_Id1");
+                //entity.HasOne(d => d.ApplicationUserId1Navigation)
+                //    .WithMany(p => p.FollowUserApplicationUserId1Navigations)
+                //    .HasForeignKey(d => d.ApplicationUserId1)
+                //    .HasConstraintName("FK_dbo.FollowUsers_dbo.AspNetUsers_ApplicationUser_Id1");
 
-                entity.HasOne(d => d.FromUser)
-                    .WithMany(p => p.FollowUserFromUsers)
-                    .HasForeignKey(d => d.FromUserId)
-                    .HasConstraintName("FK_dbo.FollowUsers_dbo.AspNetUsers_FromUserId");
+                //entity.HasOne(d => d.FromUser)
+                //    .WithMany(p => p.FollowUserFromUsers)
+                //    .HasForeignKey(d => d.FromUserId)
+                //    .HasConstraintName("FK_dbo.FollowUsers_dbo.AspNetUsers_FromUserId");
 
-                entity.HasOne(d => d.ToUser)
-                    .WithMany(p => p.FollowUserToUsers)
-                    .HasForeignKey(d => d.ToUserId)
-                    .HasConstraintName("FK_dbo.FollowUsers_dbo.AspNetUsers_ToUserId");
+                //entity.HasOne(d => d.ToUser)
+                //    .WithMany(p => p.FollowUserToUsers)
+                //    .HasForeignKey(d => d.ToUserId)
+                //    .HasConstraintName("FK_dbo.FollowUsers_dbo.AspNetUsers_ToUserId");
             });
 
             modelBuilder.Entity<Goal>(entity =>
@@ -216,10 +216,10 @@ namespace API.W.Models
 
                 entity.Property(e => e.UserId).HasMaxLength(128);
 
-                entity.HasOne(d => d.User)
-                    .WithMany(p => p.Goals)
-                    .HasForeignKey(d => d.UserId)
-                    .HasConstraintName("FK_dbo.Goals_dbo.AspNetUsers_UserId");
+                //entity.HasOne(d => d.User)
+                //    .WithMany(p => p.Goals)
+                //    .HasForeignKey(d => d.UserId)
+                //    .HasConstraintName("FK_dbo.Goals_dbo.AspNetUsers_UserId");
             });
 
             modelBuilder.Entity<GoalStatus>(entity =>
@@ -240,10 +240,10 @@ namespace API.W.Models
             {
                 entity.Property(e => e.CommentDate).HasColumnType("datetime");
 
-                entity.HasOne(d => d.GroupUpdate)
-                    .WithMany(p => p.GroupComments)
-                    .HasForeignKey(d => d.GroupUpdateId)
-                    .HasConstraintName("FK_dbo.GroupComments_dbo.GroupUpdates_GroupUpdateId");
+                //entity.HasOne(d => d.GroupUpdate)
+                //    .WithMany(p => p.GroupComments)
+                //    .HasForeignKey(d => d.GroupUpdateId)
+                //    .HasConstraintName("FK_dbo.GroupComments_dbo.GroupUpdates_GroupUpdateId");
             });
 
             modelBuilder.Entity<GroupCommentUser>(entity =>
@@ -268,25 +268,25 @@ namespace API.W.Models
             {
                 entity.Property(e => e.SentDate).HasColumnType("datetime");
 
-                entity.HasOne(d => d.Group)
-                    .WithMany(p => p.GroupInvitations)
-                    .HasForeignKey(d => d.GroupId)
-                    .HasConstraintName("FK_dbo.GroupInvitations_dbo.Groups_GroupId");
+                //entity.HasOne(d => d.Group)
+                //    .WithMany(p => p.GroupInvitations)
+                //    .HasForeignKey(d => d.GroupId)
+                //    .HasConstraintName("FK_dbo.GroupInvitations_dbo.Groups_GroupId");
             });
 
             modelBuilder.Entity<GroupRequest>(entity =>
             {
                 entity.Property(e => e.UserId).HasMaxLength(128);
 
-                entity.HasOne(d => d.Group)
-                    .WithMany(p => p.GroupRequests)
-                    .HasForeignKey(d => d.GroupId)
-                    .HasConstraintName("FK_dbo.GroupRequests_dbo.Groups_GroupId");
+                //entity.HasOne(d => d.Group)
+                //    .WithMany(p => p.GroupRequests)
+                //    .HasForeignKey(d => d.GroupId)
+                //    .HasConstraintName("FK_dbo.GroupRequests_dbo.Groups_GroupId");
 
-                entity.HasOne(d => d.User)
-                    .WithMany(p => p.GroupRequests)
-                    .HasForeignKey(d => d.UserId)
-                    .HasConstraintName("FK_dbo.GroupRequests_dbo.AspNetUsers_UserId");
+                //entity.HasOne(d => d.User)
+                //    .WithMany(p => p.GroupRequests)
+                //    .HasForeignKey(d => d.UserId)
+                //    .HasConstraintName("FK_dbo.GroupRequests_dbo.AspNetUsers_UserId");
             });
 
             modelBuilder.Entity<GroupUpdate>(entity =>
@@ -300,10 +300,10 @@ namespace API.W.Models
             {
                 entity.Property(e => e.UpdateSupportedDate).HasColumnType("datetime");
 
-                entity.HasOne(d => d.GroupUpdate)
-                    .WithMany(p => p.GroupUpdateSupports)
-                    .HasForeignKey(d => d.GroupUpdateId)
-                    .HasConstraintName("FK_dbo.GroupUpdateSupports_dbo.GroupUpdates_GroupUpdateId");
+                //entity.HasOne(d => d.GroupUpdate)
+                //    .WithMany(p => p.GroupUpdateSupports)
+                //    .HasForeignKey(d => d.GroupUpdateId)
+                //    .HasConstraintName("FK_dbo.GroupUpdateSupports_dbo.GroupUpdates_GroupUpdateId");
             });
 
             modelBuilder.Entity<GroupUpdateUser>(entity =>
