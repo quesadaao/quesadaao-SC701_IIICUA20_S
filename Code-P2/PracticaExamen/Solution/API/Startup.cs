@@ -11,6 +11,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using AutoMapper;
+using API.Mapping;
 
 namespace API
 {
@@ -31,6 +33,19 @@ namespace API
                    Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddControllers();
+
+            
+
+            //services.AddAutoMapper(typeof(Startup));
+
+            // Auto Mapper Configurations
+            var mapperConfig = new MapperConfiguration(mc =>
+            {
+                mc.AddProfile(new MappingProfile());
+            });
+
+            IMapper mapper = mapperConfig.CreateMapper();
+            services.AddSingleton(mapper);
 
             // Register the Swagger generator, defining 1 or more Swagger documents
             services.AddSwaggerGen();

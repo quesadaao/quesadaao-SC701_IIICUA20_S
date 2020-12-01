@@ -13,9 +13,9 @@ namespace DAL.EF
 
         }
 
-        public SolutionDBContext()
-        {
-        }
+        //public SolutionDBContext()
+        //{
+        //}
 
         public virtual DbSet<GroupComment> GroupComments { get; set; }
         public virtual DbSet<GroupUpdate> GroupUpdates { get; set; }

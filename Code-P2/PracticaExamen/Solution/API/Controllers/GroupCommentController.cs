@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using DAL.EF;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -14,47 +15,52 @@ namespace API.Controllers
     public class GroupCommentController : ControllerBase
     {
         private readonly SolutionDBContext _context;
+        private readonly IMapper _mapper;
 
-        public GroupCommentController(SolutionDBContext context)
+        public GroupCommentController(SolutionDBContext context, IMapper mapper)
         {
+            this._mapper = mapper;
             _context = context;
         }
 
         // GET: api/GroupComments
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<data.GroupComment>>> GetGroupComments()
+        public async Task<ActionResult<IEnumerable<DataModels.GroupComment>>> GetGroupComments()
         {
-            return new BS.GroupComment(_context).GetAll().ToList();
+            var aux = await new BS.GroupComment(_context).GetAllInclude();
+            var mapaux = _mapper.Map<IEnumerable<data.GroupComment>, IEnumerable<DataModels.GroupComment>>(aux).ToList();
+            return mapaux;
         }
 
         // GET: api/GroupComments/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<data.GroupComment>> GetGroupComment(int id)
+        public async Task<ActionResult<DataModels.GroupComment>> GetGroupComment(int id)
         {
             var groupComment = new BS.GroupComment(_context).GetOneById(id);
-
-            if (groupComment == null)
+            var mapaux = _mapper.Map<data.GroupComment, DataModels.GroupComment>(groupComment);
+            //return mapaux;
+            if (mapaux == null)
             {
                 return NotFound();
             }
-
-            return groupComment;
+            return mapaux;
+            //return groupComment;
         }
 
         // PUT: api/GroupComments/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutGroupComment(int id, data.GroupComment groupComment)
+        public async Task<IActionResult> PutGroupComment(int id, DataModels.GroupComment groupComment)
         {
             if (id != groupComment.GroupCommentId)
             {
                 return BadRequest();
             }
-
+            var mapaux = _mapper.Map<DataModels.GroupComment, data.GroupComment>(groupComment);
             try
             {
-                new BS.GroupComment(_context).Update(groupComment);
+                new BS.GroupComment(_context).Update(mapaux);
             }
             catch (Exception ee)
             {
@@ -75,16 +81,17 @@ namespace API.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
         [HttpPost]
-        public async Task<ActionResult<data.GroupComment>> PostGroupComment(data.GroupComment groupComment)
+        public async Task<ActionResult<DataModels.GroupComment>> PostGroupComment(DataModels.GroupComment groupComment)
         {
-            new BS.GroupComment(_context).Insert(groupComment);
+            var mapaux = _mapper.Map<DataModels.GroupComment, data.GroupComment>(groupComment);
+            new BS.GroupComment(_context).Insert(mapaux);
 
             return CreatedAtAction("GetGroupComment", new { id = groupComment.GroupCommentId }, groupComment);
         }
 
         // DELETE: api/GroupComments/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<data.GroupComment>> DeleteGroupComment(int id)
+        public async Task<ActionResult<DataModels.GroupComment>> DeleteGroupComment(int id)
         {
             var groupComment = new BS.GroupComment(_context).GetOneById(id);
             if (groupComment == null)
@@ -92,8 +99,9 @@ namespace API.Controllers
                 return NotFound();
             }
             new BS.GroupComment(_context).Delete(groupComment);
-
-            return groupComment;
+            var mapaux = _mapper.Map<data.GroupComment, DataModels.GroupComment>(groupComment);
+            // return null;
+            return mapaux;
         }
 
         private bool GroupCommentExists(int id)

@@ -1,19 +1,23 @@
 ﻿using DAL.EF;
 using DAL.Repository;
 using DO.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
+using System.Threading.Tasks;
 using data = DO.Objects;
 
 namespace DAL
 {
     public class GroupComment : ICRUD<data.GroupComment>
     {
-        private Repository<data.GroupComment> _repo = null;
+        private RepositoryGroupComment _repo = null;
         public GroupComment(SolutionDBContext solutionDBContext)
         {
-            _repo = new Repository<data.GroupComment>(solutionDBContext);
+            _repo = new RepositoryGroupComment(solutionDBContext);
         }
         public void Delete(data.GroupComment t)
         {
@@ -24,6 +28,11 @@ namespace DAL
         public IEnumerable<data.GroupComment> GetAll()
         {
             return _repo.GetAll();
+        }
+
+        public async Task<IEnumerable<data.GroupComment>> GetAllInclude()
+        {
+            return await _repo.GetAllWithGroupCommentsAsync();
         }
 
         public data.GroupComment GetOneById(int id)
@@ -41,6 +50,6 @@ namespace DAL
         {
             _repo.Update(t);
             _repo.Commit();
-        }
+        }       
     }
 }

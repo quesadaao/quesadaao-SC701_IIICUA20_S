@@ -1,7 +1,7 @@
 ﻿using DAL.EF;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-
+using DO.Objects;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,11 +12,18 @@ namespace DAL.Repository
 {
     public class Repository<T> : IRepository<T> where T : class
     {
-        private readonly SolutionDBContext dBContext;
+        //protected readonly DbContext dBContext;
+
+        //public Repository(DbContext context)
+        //{
+        //    dBContext = context;
+        //}
+
+        protected readonly SolutionDBContext dBContext;
 
         public Repository(SolutionDBContext context)
         {
-            dBContext = context;
+            this.dBContext = context;
         }
 
         public IQueryable<T> AsQueryble()
@@ -43,6 +50,11 @@ namespace DAL.Repository
         public IEnumerable<T> GetAll()
         {
             return dBContext.Set<T>();
+        }
+
+        public IEnumerable<T> GetAllGroupComments()
+        {
+            return (IEnumerable<T>)dBContext.Set<GroupComment>().Include(g => g.GroupUpdate);
         }
 
         public T GetOne(Expression<Func<T, bool>> predicado)
@@ -79,6 +91,16 @@ namespace DAL.Repository
                 dBContext.Set<T>().Attach(entity);
             }
             dBContext.Entry<T>(entity).State = EntityState.Modified;
+        }
+
+        public void AddRange(IEnumerable<T> entities)
+        {
+            dBContext.Set<T>().AddRange(entities);
+        }
+
+        public void RemoveRange(IEnumerable<T> entities)
+        {
+            dBContext.Set<T>().RemoveRange(entities);
         }
     }
 }

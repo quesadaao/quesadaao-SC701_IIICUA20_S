@@ -18,5 +18,8 @@ namespace DAL.Repository
         void Update(T entity);
         void Delete(T entity);
         void Commit();
+
+        void AddRange(IEnumerable<T> entities);
+        void RemoveRange(IEnumerable<T> entities);
     }
 }
