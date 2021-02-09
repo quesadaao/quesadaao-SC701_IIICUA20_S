@@ -43,7 +43,7 @@ namespace API.Controllers
         public async Task<ActionResult<DataModels.GroupComment>> GetGroupComment(int id)
         {
             var groupComment = new BS.GroupComment(_context).GetOneById(id);
-            var mapaux = _mapper.Map<data.GroupComment, DataModels.GroupComment>(groupComment);
+            var mapaux = _mapper.Map<data.GroupComment, DataModels.GroupComment>(groupComment);            
             if (mapaux == null)
             {
                 return NotFound();

@@ -13,7 +13,7 @@ namespace UI.Controllers
 {
     public class GroupCommentsController : Controller
     {
-        string baseurl = "http://localhost:59634/";
+        string baseurl = "http://localhost:5000/";
 
         // GET: GroupComments
         public async Task<IActionResult> Index()
